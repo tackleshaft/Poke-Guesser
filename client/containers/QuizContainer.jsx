@@ -2,9 +2,21 @@ import React, { useState } from 'react';
 import PokemonList from '../assets/pokemonDB.js';
 
 const QuizContainer = () => {
-  const [currentPokemon, setCurrentPokemon] = useState(PokemonList[25]);
+  const [currentPokemon, setCurrentPokemon] = useState(PokemonList[24]);
+  const [currentAnswer, setAnswer] = useState('');
 
   let correctPokemon = [];
+  let currentScore = 0;
+
+  const checkAnswer = () => {
+    if (currentAnswer === currentPokemon.name) {
+      currentScore += 1;
+      pickCurrentPokemon();
+      setAnswer('');
+    } else {
+      alert('Game Over!');
+    }
+  };
 
   const pickCurrentPokemon = () => {
     const randomPokemonIndex = Math.floor(Math.random() * 151);
@@ -25,8 +37,18 @@ const QuizContainer = () => {
   return (
     <div className='quizContainer'>
       <h1>What's that pokemon?</h1>
+      <h1>{currentScore}</h1>
       <img className='pokemonImage' src={currentPokemon.image} />
-      <button onClick={pickCurrentPokemon}>Submit</button>
+      <input
+        className='pokemonName'
+        placeholder="What's that pokemon?"
+        onChange={(e) => {
+          setAnswer(e.target.value);
+        }}
+        value={currentAnswer}
+      />
+      <button onClick={checkAnswer}>Submit</button>
+      <button onClick={startGame}>Start</button>
     </div>
   );
 };
