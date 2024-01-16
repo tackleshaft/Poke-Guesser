@@ -1,18 +1,31 @@
 import React from 'react';
 import MainContainer from './containers/MainContainer.jsx';
-import { GoogleLogin } from '@react-oauth/google';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import '../client/styles.scss'
 
 const App = () => {
   return (
-    <GoogleLogin
+    <BrowserRouter>
+      <div class="base">
+        {/* <Header /> */}
+        <Routes>
+          <Route path="/" element={<MainContainer />} />
+          {/* <MainContainer /> */}
+          {/* <Route path="/login" element={<Login />} /> */}
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+};
+
+// import { GoogleLogin } from '@react-oauth/google';
+{/* <GoogleLogin
       onSuccess={(credentialResponse) => {
         console.log(credentialResponse);
       }}
       onError={() => {
         console.log('Login Failed');
       }}
-    />
-  );
-};
+    /> */}
 
 export default App;
