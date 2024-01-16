@@ -3,11 +3,17 @@ const path = require('path');
 const PORT = 8080;
 const app = express();
 
-const cookieController = require('./controllers/cookieController');
+// const passport = require('passport');
+// const session = require('express-session');
+// require('dotenv').config();
+// require('./googleAuth');
+
 const highScoreController = require('./controllers/highScoreController');
 const sessionController = require('./controllers/sessionController');
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.resolve(__dirname, '../dist')));
 
 //app.use(cors())
 
@@ -34,3 +40,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+export default app;

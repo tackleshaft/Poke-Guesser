@@ -3,7 +3,7 @@ import React from 'react';
 const QuizContainer = () => {
   return (
     <div className='quizContainer'>
-      <h1>What is that pokemon?</h1>
+      <h1>What's that pokemon?</h1>
     </div>
   );
 };
