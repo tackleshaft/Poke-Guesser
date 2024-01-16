@@ -3,11 +3,7 @@ const path = require('path');
 const PORT = 8080;
 const app = express();
 
-// const passport = require('passport');
-// const session = require('express-session');
-// require('dotenv').config();
-// require('./googleAuth');
-
+const googleAuthController = require('./controllers/googleAuthController');
 const highScoreController = require('./controllers/highScoreController');
 const sessionController = require('./controllers/sessionController');
 
