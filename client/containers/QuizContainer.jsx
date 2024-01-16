@@ -2,35 +2,40 @@ import React, { useState } from 'react';
 import PokemonList from '../assets/pokemonDB.js';
 
 const QuizContainer = () => {
-  const [currentPokemon, setCurrentPokemon] = useState(PokemonList[24]);
-  const [currentAnswer, setAnswer] = useState('');
-
-  let correctPokemon = [];
-  let currentScore = 0;
-
-  const checkAnswer = () => {
-    if (currentAnswer === currentPokemon.name) {
-      currentScore += 1;
-      pickCurrentPokemon();
-      setAnswer('');
-    } else {
-      alert('Game Over!');
-    }
-  };
+  const [currentPokemon, setCurrentPokemon] = useState('');
+  const [currentAnswer, setCurrentAnswer] = useState('');
+  const [currentScore, setCurrentScore] = useState(0);
+  const [correctArray, setCorrectArray] = useState([]);
 
   const pickCurrentPokemon = () => {
     const randomPokemonIndex = Math.floor(Math.random() * 151);
 
-    if (correctPokemon.includes(randomPokemonIndex)) {
+    if (correctArray.includes(randomPokemonIndex)) {
       pickCurrentPokemon();
     } else {
-      correctPokemon.push(randomPokemonIndex);
+      const newArray = [...correctArray];
+      newArray.push(randomPokemonIndex);
+      setCorrectArray(newArray);
       setCurrentPokemon(PokemonList[randomPokemonIndex]);
     }
   };
 
-  const startGame = () => {
-    correctPokemon = [];
+  const checkAnswer = () => {
+    if (currentAnswer === currentPokemon.name) {
+      const score = currentScore + 1;
+      setCurrentScore(score);
+      pickCurrentPokemon();
+      setCurrentAnswer('');
+    } else {
+      alert('Game Over! Please play again!');
+      restartGame();
+    }
+  };
+
+  const restartGame = () => {
+    setCurrentAnswer('');
+    setCurrentScore(0);
+    setCorrectArray([]);
     pickCurrentPokemon();
   };
 
@@ -43,12 +48,12 @@ const QuizContainer = () => {
         className='pokemonName'
         placeholder="What's that pokemon?"
         onChange={(e) => {
-          setAnswer(e.target.value);
+          setCurrentAnswer(e.target.value);
         }}
         value={currentAnswer}
       />
       <button onClick={checkAnswer}>Submit</button>
-      <button onClick={startGame}>Start</button>
+      <button onClick={restartGame}>Start</button>
     </div>
   );
 };
