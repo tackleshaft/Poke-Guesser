@@ -26,6 +26,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|mp3|jpe?g|gif)$/i,
+        loader: 'file-loader',
+      },
     ],
   },
 };
