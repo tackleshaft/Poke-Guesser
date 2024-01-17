@@ -10,7 +10,7 @@ import {
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <GoogleOAuthProvider clientId='245321018537-i6aio1jkoma48l62jeoab697e84ecl55.apps.googleusercontent.com'>
+  <GoogleOAuthProvider clientId={process.env.clientId}>
     <App />
   </GoogleOAuthProvider>
 );
