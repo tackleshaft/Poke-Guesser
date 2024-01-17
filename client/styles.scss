@@ -80,6 +80,7 @@ body {
   animation-name: imageColor;
   animation-duration: 2s;
   animation-iteration-count: 1;
+  filter: brightness(100%)
 }
 
 @keyframes imageColor {
@@ -104,14 +105,14 @@ body {
 }
 
 .nameAnswerBox {
-  margin-top: 2%;
+  margin-top: 6%;
   position: relative;
   background-color: green;
   border-radius: 10px;
-  border-color: rgb(109, 145, 109);
+  border-color: rgb(130, 168, 130);
   border-style: groove;
-  width: 40%;
-  height: fit-content;
+  width: 54%;
+  height: 7vw;
 }
 
 .typewriter {
@@ -126,6 +127,7 @@ body {
 .pokemonName {
   position: relative;
   font-size: 1.5vw;
+  font-family: 'Courier New', Courier, monospace;
   margin-top: 5%;
   border-radius: 5px;
   background-color: rgb(204, 204, 204);
@@ -168,7 +170,6 @@ body {
 #spanTitle {
   font-size: 3vw;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 2%;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: rgb(24, 52, 175);
   flex-direction: row;
@@ -183,7 +184,7 @@ body {
   margin-left: -25%;
   background-color: green;
   border-radius: 10px;
-  border-color: rgb(109, 145, 109);
+  border-color: rgb(130, 168, 130);
   border-style: groove;
   height: fit-content;
   width: 100%;

@@ -58,4 +58,5 @@ module.exports = {
     },
     //use to load react components with react router
   },
+  performance: { hints: false }
 };

@@ -12,7 +12,7 @@ const QuizContainer = ({
   const [currentPokemon, setCurrentPokemon] = useState('');
   const [currentAnswer, setCurrentAnswer] = useState('');
   const [correctArray, setCorrectArray] = useState([]);
-  const [currentPokemonName, setCurrentPokemonName] = useState('Pokedex');
+  const [currentPokemonName, setCurrentPokemonName] = useState('POKEDEX INFO');
   const [gameStarted, setGameStarted] = useState(false);
   const [firstGame, setFirstGame] = useState(true);
 
@@ -22,7 +22,7 @@ const QuizContainer = ({
     if (correctArray.includes(randomPokemonIndex)) {
       pickCurrentPokemon();
     } else {
-      setCurrentPokemonName('Pokedex');
+      setCurrentPokemonName('POKEDEX INFO');
       const newArray = [...correctArray];
       newArray.push(randomPokemonIndex);
       setCorrectArray(newArray);
@@ -35,7 +35,7 @@ const QuizContainer = ({
   };
 
   const checkAnswer = () => {
-    setCurrentPokemonName(`YES! ${currentPokemon.name}`);
+    setCurrentPokemonName(`CAUGHT ${currentPokemon.name}!`);
     const pokemonImage = document.querySelector('.pokemonImage');
     pokemonImage.classList.add('imageAnswer');
 
@@ -48,11 +48,11 @@ const QuizContainer = ({
         setHighScore(score);
       }
 
-      setTimeout(pickCurrentPokemon, 2000);
+      setTimeout(pickCurrentPokemon, 5000);
 
       setCurrentAnswer('');
     } else {
-      setCurrentPokemonName(`NO! ${currentPokemon.name}`);
+      setCurrentPokemonName(`INVALID DATA ENTRY! WILD ${currentPokemon.name} FLED!`);
       setGameStarted(false);
       setFirstGame(false);
     }
