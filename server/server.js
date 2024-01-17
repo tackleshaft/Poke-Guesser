@@ -1,21 +1,30 @@
 const express = require('express');
 const path = require('path');
-const PORT = 8080;
+const PORT = 3000;
+// const cors = require('cors')
 const app = express();
 
 const googleAuthController = require('./controllers/googleAuthController');
 const highScoreController = require('./controllers/highScoreController');
-const sessionController = require('./controllers/sessionController');
+const userController = require('./controllers/userController');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.resolve(__dirname, '../dist')));
+app.use(express.static(path.resolve(__dirname, '../build')));
+// app.use(cors()) 
 
-//app.use(cors())
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+
+//Route to pull top 5 highscores
+// app.get('/api/gethighscores', highScoreController.getTopScores, (req, res) => 
+//  res.status(200).send(res.locals.topScores)
+// )
+
+//validate user login and send back app state
+app.post('/api/checkuser', userController.checkUser, (req, res) => {
+  console.log('this is email', req.body.email);
+  return res.status(200).send(res.locals.userInfo)});
+
 
 //serve 404 error to all other unknown routes
 app.use('*', (req, res) => res.status(404).send('Page not found'));
@@ -37,4 +46,5 @@ app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
-export default app;
+//uncomment for testing:
+// export default app;
