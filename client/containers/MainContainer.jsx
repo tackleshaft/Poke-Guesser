@@ -3,9 +3,10 @@ import GameContainer from './GameContainer.jsx';
 import Pokedex from '../assets/pokedex.png';
 import ScoreContainer from './ScoreContainer.jsx';
 
+
 const MainContainer = () => {
   const [currentScore, setCurrentScore] = useState(0);
-  const [highScore, setHighScore] = useState(0)
+  const [highScore, setHighScore] = useState(0);
 
   return (
     <div className='mainContainer'>
