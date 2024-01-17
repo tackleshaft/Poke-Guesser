@@ -39,6 +39,10 @@ app.get(
   }
 );
 
+app.post('/api/addscore', highScoreController.addScore, (req, res) => {
+  return res.status(200).send(res.locals.newScore);
+});
+
 //serve 404 error to all other unknown routes
 app.use('*', (req, res) => res.status(404).send('Page not found'));
 
