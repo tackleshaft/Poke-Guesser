@@ -15,20 +15,29 @@ const userController = require('./controllers/userController');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../build')));
-// app.use(cors()) 
-
-
+// app.use(cors())
 
 //Route to pull top 5 highscores
-// app.get('/api/gethighscores', highScoreController.getTopScores, (req, res) => 
+// app.get('/api/gethighscores', highScoreController.getTopScores, (req, res) =>
 //  res.status(200).send(res.locals.topScores)
 // )
 
 //validate user login and send back app state
 app.post('/api/checkuser', userController.checkUser, (req, res) => {
-  console.log('this is email', req.body.email);
-  return res.status(200).send(res.locals.userInfo)});
+  return res.status(200).send(res.locals.userInfo);
+});
 
+app.get('/api/getscoreboard', highScoreController.getScoreboard, (req, res) => {
+  return res.status(200).send(res.locals.scoreboard);
+});
+
+app.get(
+  '/api/getpersonalbest',
+  highScoreController.getPersonalBest,
+  (req, res) => {
+    return res.status(200).send(res.locals.personalBest);
+  }
+);
 
 //serve 404 error to all other unknown routes
 app.use('*', (req, res) => res.status(404).send('Page not found'));

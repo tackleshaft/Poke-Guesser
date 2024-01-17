@@ -1,18 +1,44 @@
-// const db = require("./models")
+const { User, HighScore } = require('../../databases/pgModel');
 
 const highScoreController = {
-  getUserHighScore: (req, res, next) => {
+  getPersonalBest: async (req, res, next) => {
     //grab the high score of the current user from DB
-    return next();
+    try {
+      const { username } = req.body;
+
+      const personalBest = await HighScore.findOne({
+        where: { username: username.username },
+        order: [['score', 'DESC']],
+      });
+      console.log('personal best:', personalBest);
+      res.locals.personalBest = { personalBest };
+      return next();
+    } catch (error) {
+      console.error('Error in getPersonalBest:', error);
+      return res.status(500).send('Internal Server Error');
+    }
   },
-
-  getTopScores: (req, res, next) => {
+  getScoreboard: async (req, res, next) => {
     //pull the top 5 highest scores from SQL DB and their usernames
-    const GET_TOP_SCORES_QUERY = 'SELECT UT.Username, HT.Score FROM USER_TABLE UT JOIN HIGHSCORETABLE HT ON UT.ID = HT.UserID ORDER BY HT.Score DESC LIMIT 5;'
-
-
-
-    return next();
+    try {
+      const topScores = await HighScore.findAll({
+        attributes: ['score'],
+        include: [
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],
+        order: [['score', 'DESC']],
+        limit: 5,
+      });
+      console.log('top scores:', topScores);
+      res.locals.scoreboard = { topScores };
+      return next();
+    } catch (error) {
+      console.error('Error in getPersonalBest:', error);
+      return res.status(500).send('Internal Server Error');
+    }
   },
 };
 
