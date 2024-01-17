@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PokemonList from '../assets/pokemonDB.js';
+import TypeWriter from './TypeWriter.jsx';
 
 const QuizContainer = () => {
   const [currentPokemon, setCurrentPokemon] = useState('');
@@ -42,8 +43,12 @@ const QuizContainer = () => {
   return (
     <div className='quizContainer'>
       {/* <h1>Who's that Pokemon?</h1> */}
-      <h1>{currentScore}</h1>
+      {/* <h1>{currentScore}</h1> */}
+      <br></br>
       <img className='pokemonImage' src={currentPokemon.image} />
+      <div className='nameAnswerBox'>
+        <TypeWriter />
+      </div>
       <input
         className='pokemonName'
         placeholder="Who's that Pokemon?"

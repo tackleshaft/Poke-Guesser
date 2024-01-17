@@ -52,31 +52,59 @@ body {
 
 .pokemonImage {
   position: fixed;
-  margin-top: -30%;
+  margin-top: -40%;
   margin-left: -10%;
   width: 10%;
   filter: brightness(0%);
 }
 
+.nameAnswerBox {
+  margin-top: 2%;
+  position: relative;
+  background-color: green;
+  border-radius: 10px;
+  border-color: rgb(109, 145, 109);
+  border-style: groove;
+  width: 40%;
+  height: fit-content;
+}
+
+.typewriter {
+  position: relative;
+  color: rgb(10, 44, 10);
+  padding: 5%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .pokemonName {
   position: relative;
-  font-size: large;
+  font-size: 1rem;
+  margin-top: 5%;
+  border-radius: 5px;
+  background-color: rgb(204, 204, 204);
+  color: rgb(77, 74, 74);
 }
 
 #submitBtn {
   position: relative;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 1rem;
   background-color: #3b4cca;
   color: azure;
+  font-weight: bold;
+  padding: 1%;
 }
 
 #startBtn {
   position: relative;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 1rem;
-  background-color: #cc0000;
+  font-weight: bold;
+  background-color: #11ac57;
   color: azure;
+  padding: 1%;
 }
 
 .scoreContainer {
