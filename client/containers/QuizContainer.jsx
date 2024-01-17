@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PokemonList from '../assets/pokemonDB.js';
 import TypeWriter from './TypeWriter.jsx';
 
+
 const QuizContainer = ({
   currentScore,
   setCurrentScore,
