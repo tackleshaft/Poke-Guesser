@@ -41,19 +41,21 @@ const QuizContainer = () => {
 
   return (
     <div className='quizContainer'>
-      <h1>What's that pokemon?</h1>
+      {/* <h1>Who's that Pokemon?</h1> */}
       <h1>{currentScore}</h1>
       <img className='pokemonImage' src={currentPokemon.image} />
       <input
         className='pokemonName'
-        placeholder="What's that pokemon?"
+        placeholder="Who's that pokemon?"
         onChange={(e) => {
           setCurrentAnswer(e.target.value);
         }}
         value={currentAnswer}
       />
-      <button onClick={checkAnswer}>Submit</button>
-      <button onClick={restartGame}>Start</button>
+      <br></br>
+      <button id='submitBtn' onClick={checkAnswer}>Submit</button>
+      <br></br>
+      <button id='startBtn' onClick={restartGame}>Start</button>
     </div>
   );
 };
