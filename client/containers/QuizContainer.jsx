@@ -7,6 +7,7 @@ const QuizContainer = () => {
   const [currentAnswer, setCurrentAnswer] = useState('');
   const [currentScore, setCurrentScore] = useState(0);
   const [correctArray, setCorrectArray] = useState([]);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const pickCurrentPokemon = () => {
     const randomPokemonIndex = Math.floor(Math.random() * 151);
@@ -17,15 +18,27 @@ const QuizContainer = () => {
       const newArray = [...correctArray];
       newArray.push(randomPokemonIndex);
       setCorrectArray(newArray);
+
       setCurrentPokemon(PokemonList[randomPokemonIndex]);
+
+      setShowAnswer(false);
+      const pokemonImage = document.querySelector('.pokemonImage');
+      pokemonImage.classList.remove('imageAnswer');
     }
   };
 
   const checkAnswer = () => {
-    if (currentAnswer === currentPokemon.name) {
+    setShowAnswer(true);
+    const pokemonImage = document.querySelector('.pokemonImage');
+    pokemonImage.classList.add('imageAnswer');
+
+    const filterAnswer = currentAnswer.toLowerCase();
+    if (filterAnswer === currentPokemon.name) {
       const score = currentScore + 1;
       setCurrentScore(score);
-      pickCurrentPokemon();
+
+      setTimeout(pickCurrentPokemon, 2000);
+
       setCurrentAnswer('');
     } else {
       alert('Game Over! Please play again!');
@@ -44,8 +57,12 @@ const QuizContainer = () => {
     <div className='quizContainer'>
       {/* <h1>Who's that Pokemon?</h1> */}
       {/* <h1>{currentScore}</h1> */}
-      <br></br>
       <img className='pokemonImage' src={currentPokemon.image} />
+      {showAnswer ? (
+        <h1 className='correctName'>{`It's ${currentPokemon.name}`}</h1>
+      ) : (
+        <h1 className='correctName'>{`Who's that Pokemon?`}</h1>
+      )}
       <div className='nameAnswerBox'>
         <TypeWriter />
       </div>
@@ -58,9 +75,13 @@ const QuizContainer = () => {
         value={currentAnswer}
       />
       <br></br>
-      <button id='submitBtn' onClick={checkAnswer}>Submit</button>
+      <button id='submitBtn' onClick={checkAnswer}>
+        Submit
+      </button>
       <br></br>
-      <button id='startBtn' onClick={restartGame}>Start</button>
+      <button id='startBtn' onClick={restartGame}>
+        Start
+      </button>
     </div>
   );
 };

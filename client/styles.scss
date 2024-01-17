@@ -11,7 +11,6 @@ body {
 }
 
 .logo {
-
 }
 
 .mainContainer {
@@ -50,12 +49,43 @@ body {
   width: 52%;
 }
 
+.correctName {
+  z-index: 1;
+}
+
 .pokemonImage {
   position: fixed;
   margin-top: -40%;
   margin-left: -10%;
   width: 10%;
   filter: brightness(0%);
+}
+
+.imageAnswer {
+  animation-name: imageColor;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+
+@keyframes imageColor {
+  0% {
+    filter: brightness(0%);
+  }
+  20% {
+    filter: brightness(20%);
+  }
+  40% {
+    filter: brightness(40%);
+  }
+  60% {
+    filter: brightness(60%);
+  }
+  80% {
+    filter: brightness(80%);
+  }
+  100% {
+    filter: brightness(100%);
+  }
 }
 
 .nameAnswerBox {
