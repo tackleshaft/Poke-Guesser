@@ -46,7 +46,7 @@ const QuizContainer = () => {
       <img className='pokemonImage' src={currentPokemon.image} />
       <input
         className='pokemonName'
-        placeholder="Who's that pokemon?"
+        placeholder="Who's that Pokemon?"
         onChange={(e) => {
           setCurrentAnswer(e.target.value);
         }}
