@@ -15,11 +15,16 @@ const Login = (props) => {
                 const data = {
                     email: credentialResponseDecoded.email
                 }
+
                 fetch('/checkUser', {
                     body: JSON.stringify(data)
                 })
                     .then(res => res.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        console.log(data);
+                        updateUserInfo(data);
+                        return;
+                    })
                     .catch(err => console.log(err))
                 
                 //If not, create db entry
