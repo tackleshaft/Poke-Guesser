@@ -2,10 +2,19 @@ import React, { useState } from 'react';
 import PokemonList from '../assets/pokemonDB.js';
 import TypeWriter from './TypeWriter.jsx';
 
-const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore}) => {
+
+const QuizContainer = ({
+  currentScore,
+  setCurrentScore,
+  highScore,
+  setHighScore,
+}) => {
   const [currentPokemon, setCurrentPokemon] = useState('');
   const [currentAnswer, setCurrentAnswer] = useState('');
   const [correctArray, setCorrectArray] = useState([]);
+  const [currentPokemonName, setCurrentPokemonName] = useState('Pokedex');
+  const [gameStarted, setGameStarted] = useState(false);
+  const [firstGame, setFirstGame] = useState(true);
 
   const pickCurrentPokemon = () => {
     const randomPokemonIndex = Math.floor(Math.random() * 151);
@@ -13,6 +22,7 @@ const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore})
     if (correctArray.includes(randomPokemonIndex)) {
       pickCurrentPokemon();
     } else {
+      setCurrentPokemonName('Pokedex');
       const newArray = [...correctArray];
       newArray.push(randomPokemonIndex);
       setCorrectArray(newArray);
@@ -25,6 +35,7 @@ const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore})
   };
 
   const checkAnswer = () => {
+    setCurrentPokemonName(`YES! ${currentPokemon.name}`);
     const pokemonImage = document.querySelector('.pokemonImage');
     pokemonImage.classList.add('imageAnswer');
 
@@ -34,19 +45,21 @@ const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore})
       setCurrentScore(score);
 
       if (score > highScore) {
-        setHighScore(score)
+        setHighScore(score);
       }
 
       setTimeout(pickCurrentPokemon, 2000);
 
       setCurrentAnswer('');
     } else {
-      alert('Game Over! Please play again!');
-      restartGame();
+      setCurrentPokemonName(`NO! ${currentPokemon.name}`);
+      setGameStarted(false);
+      setFirstGame(false);
     }
   };
 
   const restartGame = () => {
+    setGameStarted(true);
     setCurrentAnswer('');
     setCurrentScore(0);
     setCorrectArray([]);
@@ -55,9 +68,9 @@ const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore})
 
   const keypressEnter = (e) => {
     if (e.key == 'Enter') {
-      checkAnswer()
+      checkAnswer();
     }
-  }
+  };
 
   return (
     <div className='quizContainer'>
@@ -66,7 +79,7 @@ const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore})
       <br></br>
       <img className='pokemonImage' src={currentPokemon.image} />
       <div className='nameAnswerBox'>
-        <TypeWriter pokemon={"pokedex"}/>
+        <TypeWriter text={currentPokemonName} delay={100} />
       </div>
       <input
         className='pokemonName'
@@ -82,9 +95,13 @@ const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore})
         Submit
       </button>
       <br></br>
-      <button id='startBtn' onClick={restartGame}>
-        Start
-      </button>
+      {gameStarted ? (
+        <button></button>
+      ) : (
+        <button id='startBtn' onClick={restartGame}>
+          {firstGame ? 'Start Game' : 'Restart Game'}
+        </button>
+      )}
     </div>
   );
 };
