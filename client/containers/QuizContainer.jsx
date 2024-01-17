@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import PokemonList from '../assets/pokemonDB.js';
 import TypeWriter from './TypeWriter.jsx';
 
-const QuizContainer = () => {
+const QuizContainer = ({currentScore, setCurrentScore, highScore, setHighScore}) => {
   const [currentPokemon, setCurrentPokemon] = useState('');
   const [currentAnswer, setCurrentAnswer] = useState('');
-  const [currentScore, setCurrentScore] = useState(0);
   const [correctArray, setCorrectArray] = useState([]);
-  const [showAnswer, setShowAnswer] = useState(false);
 
   const pickCurrentPokemon = () => {
     const randomPokemonIndex = Math.floor(Math.random() * 151);
@@ -21,14 +19,12 @@ const QuizContainer = () => {
 
       setCurrentPokemon(PokemonList[randomPokemonIndex]);
 
-      setShowAnswer(false);
       const pokemonImage = document.querySelector('.pokemonImage');
       pokemonImage.classList.remove('imageAnswer');
     }
   };
 
   const checkAnswer = () => {
-    setShowAnswer(true);
     const pokemonImage = document.querySelector('.pokemonImage');
     pokemonImage.classList.add('imageAnswer');
 
@@ -36,6 +32,10 @@ const QuizContainer = () => {
     if (filterAnswer === currentPokemon.name) {
       const score = currentScore + 1;
       setCurrentScore(score);
+
+      if (score > highScore) {
+        setHighScore(score)
+      }
 
       setTimeout(pickCurrentPokemon, 2000);
 
@@ -53,18 +53,20 @@ const QuizContainer = () => {
     pickCurrentPokemon();
   };
 
+  const keypressEnter = (e) => {
+    if (e.key == 'Enter') {
+      checkAnswer()
+    }
+  }
+
   return (
     <div className='quizContainer'>
       {/* <h1>Who's that Pokemon?</h1> */}
       {/* <h1>{currentScore}</h1> */}
+      <br></br>
       <img className='pokemonImage' src={currentPokemon.image} />
-      {showAnswer ? (
-        <h1 className='correctName'>{`It's ${currentPokemon.name}`}</h1>
-      ) : (
-        <h1 className='correctName'>{`Who's that Pokemon?`}</h1>
-      )}
       <div className='nameAnswerBox'>
-        <TypeWriter />
+        <TypeWriter pokemon={"pokedex"}/>
       </div>
       <input
         className='pokemonName'
@@ -73,6 +75,7 @@ const QuizContainer = () => {
           setCurrentAnswer(e.target.value);
         }}
         value={currentAnswer}
+        onKeyPress={keypressEnter}
       />
       <br></br>
       <button id='submitBtn' onClick={checkAnswer}>
