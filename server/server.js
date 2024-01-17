@@ -4,12 +4,7 @@ const PORT = 3000;
 // const cors = require('cors')
 const app = express();
 
-// const passport = require('passport');
-// const session = require('express-session');
-// require('dotenv').config();
-// require('./googleAuth');
-
-const highScoreController = require('./controllers/highScoreController');
+const highScoreController = require('./controllers/highScoreController')
 const userController = require('./controllers/userController');
 
 app.use(express.json());
