@@ -4,8 +4,7 @@ const PORT = 3000;
 // const cors = require('cors')
 const app = express();
 
-const googleAuthController = require('./controllers/googleAuthController');
-const highScoreController = require('./controllers/highScoreController');
+const highScoreController = require('./controllers/highScoreController')
 const userController = require('./controllers/userController');
 
 app.use(express.json());
