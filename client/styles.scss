@@ -1,11 +1,12 @@
-body {
+.mainContainer {
   margin: 10px;
+  padding: 10px;
   // background-color: #cc0000;
   color: #3b4cca;
-}
-
-.base {
   background: url(../assets/pokedex-open.png);
   background-repeat: no-repeat;
   background-size: auto;
+}
+
+.pokemonName {
 }

@@ -6,7 +6,7 @@ import '../client/styles.scss'
 const App = () => {
   return (
     <BrowserRouter>
-      <div class="base">
+      <div className="base">
         {/* <Header /> */}
         <Routes>
           <Route path="/" element={<MainContainer />} />
