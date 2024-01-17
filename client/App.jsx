@@ -8,6 +8,7 @@ const App = () => {
   return (
     <div className='base'>
       <Header />
+      <Login />
       <MainContainer />
     </div>
   );
