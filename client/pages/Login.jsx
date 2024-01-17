@@ -17,6 +17,7 @@ const Login = (props) => {
                 }
 
                 fetch('/checkUser', {
+                    method: "POST",
                     body: JSON.stringify(data)
                 })
                     .then(res => res.json())

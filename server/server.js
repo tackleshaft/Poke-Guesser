@@ -26,7 +26,7 @@ app.get('/gethighscores', (req, res) => {
   highScoreController.getTopScores, res.status(404).send(res.locals.topScores)
 })
 
-app.get('/checkuser', (req, res) => {
+app.post('/checkuser', (req, res) => {
   userController.checkUser, res.status(404).send(res.locals.userInfo)
 })
 
