@@ -6,7 +6,6 @@ import '../client/styles.scss'
 const App = () => {
   return (
       <div className="base">
-        <Header />
         <MainContainer />
       </div>
   );
