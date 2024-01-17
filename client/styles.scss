@@ -1,6 +1,17 @@
 body {
   background-color: azure;
   overflow: hidden;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+}
+
+.logo {
+
 }
 
 .mainContainer {
