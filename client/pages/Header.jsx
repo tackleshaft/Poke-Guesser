@@ -8,7 +8,6 @@ const Header = (props) => {
 
   return (
     <div className='header'>
-        <Login updateUserInfo={updateUserInfo} />
         <img className='who' src={Who}></img>
         <img className='logo' src={Logo}></img>
     </div>

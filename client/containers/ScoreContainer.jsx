@@ -1,7 +1,10 @@
 import React from 'react';
-import Pokeball from '../assets/favicon.png'
+import Pokeball from '../assets/favicon.png';
+import Login from '../pages/Login.jsx';
 
-const ScoreContainer = ({currentScore, highScore}) => {
+const ScoreContainer = ({currentScore, highScore}, props) => {
+  const { updateUserInfo } = props
+
   return (
     <div className='scoreContainer'>
       <span id='spanTitle'>
@@ -15,6 +18,8 @@ const ScoreContainer = ({currentScore, highScore}) => {
         <br></br>
         <span>Current Score: {currentScore === 0? "-": currentScore}</span>
       </div>
+      <br></br>
+      <Login updateUserInfo={updateUserInfo} />
     </div>
   );
 };
