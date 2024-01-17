@@ -8,4 +8,13 @@ describe('Server Route testing', () => {
       expect(res.statusCode).toBe(404);
     });
   });
+
+  describe('Check User route test', () => {
+    it('should return status 200 and user info for a valid user', async () => {
+      const res = await request(app)
+        .post('/api/checkuser')
+        .send({ email: 'ashketchum@gmail.com' });
+      expect(res.statusCode).toBe(200);
+    });
+  });
 });

@@ -44,24 +44,24 @@ HighScore.init({
 
 sql.sync();
 
-HighScore.findAll({
-    attributes: ['score'],
-    include: [
-        {
-            model: User,
-            attributes: ['username'],
-        },
-    ],
-    order: [['score', 'DESC']],
-    limit: 5,
-}).then((topScores) => {
-    console.log('Top 5 Scores:');
-    topScores.forEach((score, index) => {
-        console.log(`${index + 1}. Username: ${score.User.username}, Score: ${score.score}`);
-    });
-}).catch((error) => {
-    console.error('Error fetching top scores:', error);
-});
+// HighScore.findAll({
+//     attributes: ['score'],
+//     include: [
+//         {
+//             model: User,
+//             attributes: ['username'],
+//         },
+//     ],
+//     order: [['score', 'DESC']],
+//     limit: 5,
+// }).then((topScores) => {
+//     console.log('Top 5 Scores:');
+//     topScores.forEach((score, index) => {
+//         console.log(`${index + 1}. Username: ${score.User.username}, Score: ${score.score}`);
+//     });
+// }).catch((error) => {
+//     console.error('Error fetching top scores:', error);
+// });
 
 
 module.exports = { User, HighScore };

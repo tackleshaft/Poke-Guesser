@@ -59,4 +59,4 @@ app.listen(PORT, () => {
 });
 
 //uncomment for testing:
-// export default app;
+export default app;
