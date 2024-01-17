@@ -5,16 +5,10 @@ import '../client/styles.scss'
 
 const App = () => {
   return (
-    <BrowserRouter>
       <div className="base">
-        {/* <Header /> */}
-        <Routes>
-          <Route path="/" element={<MainContainer />} />
-          {/* <MainContainer /> */}
-          {/* <Route path="/login" element={<Login />} /> */}
-        </Routes>
+        <Header />
+        <MainContainer />
       </div>
-    </BrowserRouter>
   );
 };
 
