@@ -1,12 +1,77 @@
+body {
+  background-color: azure;
+  overflow: hidden;
+}
+
 .mainContainer {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  // align-items:center;
   margin: 10px;
   padding: 10px;
-  // background-color: #cc0000;
   color: #3b4cca;
-  background: url(../assets/pokedex-open.png);
+  // background: url('../client/assets/pokedex.png');
   background-repeat: no-repeat;
   background-size: auto;
 }
 
+.pokedex {
+  margin: 5%;
+  position: fixed;
+  width: 80%;
+}
+
+.guessbg {
+  position: relative;
+  border-radius: 10px;
+  border-style: groove;
+  margin-top: 22%;
+  margin-left: 12%;
+  width: 30%;
+}
+
+.quizContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 52%;
+}
+
+.pokemonImage {
+  position: fixed;
+  margin-top: -30%;
+  margin-left: -10%;
+  width: 10%;
+  filter: brightness(0%);
+}
+
 .pokemonName {
+  position: relative;
+  font-size: large;
+}
+
+#submitBtn {
+  position: relative;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #3b4cca;
+  color: azure;
+}
+
+#startBtn {
+  position: relative;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #cc0000;
+  color: azure;
+}
+
+.scoreContainer {
+  position: relative;
+  margin-left: 58%;
+  margin-top: -36%;
+  font-size: 2vw;
+  color: aliceblue;
 }
