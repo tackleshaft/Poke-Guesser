@@ -8,13 +8,38 @@ const QuizContainer = ({
   setCurrentScore,
   highScore,
   setHighScore,
+  userData,
+  setLeaderBoard,
 }) => {
   const [currentPokemon, setCurrentPokemon] = useState('');
   const [currentAnswer, setCurrentAnswer] = useState('');
   const [correctArray, setCorrectArray] = useState([]);
-  const [currentPokemonName, setCurrentPokemonName] = useState('POKEDEX INFO');
+  const [currentPokemonName, setCurrentPokemonName] = useState('Pokedex');
   const [gameStarted, setGameStarted] = useState(false);
   const [firstGame, setFirstGame] = useState(true);
+
+  const postUserScore = (userScore) => {
+    console.log(userData);
+    if (userData) {
+      fetch('/api/addscore', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: userData, score: userScore }),
+      })
+        .then((res) => res.json())
+        .then((data) => {})
+        .catch((err) => console.log(err));
+
+      fetch('/api/getscoreboard')
+        .then((res) => res.json())
+        .then((data) => {
+          setLeaderBoard(data);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   const pickCurrentPokemon = () => {
     const randomPokemonIndex = Math.floor(Math.random() * 151);
@@ -55,6 +80,8 @@ const QuizContainer = ({
       setCurrentPokemonName(`INVALID DATA ENTRY! WILD ${currentPokemon.name} FLED!`);
       setGameStarted(false);
       setFirstGame(false);
+
+      postUserScore(currentScore);
     }
   };
 

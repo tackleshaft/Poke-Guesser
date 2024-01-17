@@ -29,7 +29,6 @@ class HighScore extends Model {}
 HighScore.init({
     userId: {
         type: DataTypes.STRING,
-        primaryKey: true,
     },
     score: {
         type: DataTypes.INTEGER,
@@ -42,26 +41,14 @@ HighScore.init({
     timestamps: false,
 });
 
-sql.sync();
-
-HighScore.findAll({
-    attributes: ['score'],
-    include: [
-        {
-            model: User,
-            attributes: ['username'],
-        },
-    ],
-    order: [['score', 'DESC']],
-    limit: 5,
-}).then((topScores) => {
-    console.log('Top 5 Scores:');
-    topScores.forEach((score, index) => {
-        console.log(`${index + 1}. Username: ${score.User.username}, Score: ${score.score}`);
+sql.sync({ force: true })
+    .then(() => {
+        console.log('Tables dropped and recreated.');
+    })
+    .catch((error) => {
+        console.error('Error dropping and recreating tables:', error);
     });
-}).catch((error) => {
-    console.error('Error fetching top scores:', error);
-});
 
 
 module.exports = { User, HighScore };
+3
