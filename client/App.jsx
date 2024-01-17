@@ -6,10 +6,10 @@ import '../client/styles.scss';
 
 const App = () => {
   return (
-      <div className="base">
-        <Login />
-        <MainContainer />
-      </div>
+    <div className='base'>
+      <Login />
+      <MainContainer />
+    </div>
   );
 };
 

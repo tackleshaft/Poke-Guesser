@@ -17,10 +17,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/pages/Login.jsx'));
-});
-
 //serve 404 error to all other unknown routes
 app.use('*', (req, res) => res.status(404).send('Page not found'));
 
