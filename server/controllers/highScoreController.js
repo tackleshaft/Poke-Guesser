@@ -16,4 +16,4 @@ const highScoreController = {
   },
 };
 
-export default highScoreController;
+module.exports = highScoreController;

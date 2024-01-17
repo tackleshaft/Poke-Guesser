@@ -8,20 +8,12 @@ const sql = new Sequelize(URL);
 class User extends Model {}
 
 User.init({
-    id: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-    },
     username: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    highScore: {
+    userHighScore: {
         type: DataTypes.INTEGER,
         defaultValue: 0, 
     },
@@ -50,10 +42,7 @@ HighScore.init({
     timestamps: false,
 });
 
-User.hasMany(HighScore, { foreignKey: 'userId' }); 
-HighScore.belongsTo(User, { foreignKey: 'userId'}); 
-
-sql.sync()
+sql.sync();
 
 HighScore.findAll({
     attributes: ['score'],

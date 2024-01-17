@@ -2,10 +2,13 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './client/index.js',
+  mode: "production",
+  entry: {
+    src: './client/index.js',
+  },
   output: {
-    path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build'),
   },
 
   plugins: [
@@ -42,5 +45,17 @@ module.exports = {
         ],
       },
     ],
+  },
+  devServer: {
+    //allow to run both front and backend
+    static: {
+      publicPath: '/build',
+      directory: path.resolve(__dirname, 'build'),
+    },
+    //send all request to backend
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
+    //use to load react components with react router
   },
 };
