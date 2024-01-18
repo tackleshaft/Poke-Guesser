@@ -1,12 +1,12 @@
 import React from 'react';
 import QuizContainer from './QuizContainer.jsx';
-import ScoreContainer from './ScoreContainer.jsx';
+import GuessBG from '../assets/guessBg.png';
 
-const GameContainer = () => {
+const GameContainer = ({currentScore, setCurrentScore, highScore, setHighScore}) => {
   return (
     <div className='gameContainer'>
-      <QuizContainer />
-      <ScoreContainer />
+      <img className='guessbg' src={GuessBG} />
+      <QuizContainer currentScore={currentScore} setCurrentScore={setCurrentScore} highScore={highScore} setHighScore={setHighScore} />
     </div>
   );
 };

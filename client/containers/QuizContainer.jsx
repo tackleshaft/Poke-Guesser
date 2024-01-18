@@ -1,9 +1,134 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PokemonList from '../assets/pokemonDB.js';
+import TypeWriter from './TypeWriter.jsx';
 
-const QuizContainer = () => {
+
+const QuizContainer = ({
+  currentScore,
+  setCurrentScore,
+  highScore,
+  setHighScore,
+  userData,
+  setLeaderBoard,
+}) => {
+  const [currentPokemon, setCurrentPokemon] = useState('');
+  const [currentAnswer, setCurrentAnswer] = useState('');
+  const [correctArray, setCorrectArray] = useState([]);
+  const [currentPokemonName, setCurrentPokemonName] = useState('Pokedex');
+  const [gameStarted, setGameStarted] = useState(false);
+  const [firstGame, setFirstGame] = useState(true);
+
+  const postUserScore = (userScore) => {
+    console.log(userData);
+    if (userData) {
+      fetch('/api/addscore', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: userData, score: userScore }),
+      })
+        .then((res) => res.json())
+        .then((data) => {})
+        .catch((err) => console.log(err));
+
+      fetch('/api/getscoreboard')
+        .then((res) => res.json())
+        .then((data) => {
+          setLeaderBoard(data);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const pickCurrentPokemon = () => {
+    const randomPokemonIndex = Math.floor(Math.random() * 151);
+
+    if (correctArray.includes(randomPokemonIndex)) {
+      pickCurrentPokemon();
+    } else {
+      setCurrentPokemonName('POKEDEX INFO');
+      const newArray = [...correctArray];
+      newArray.push(randomPokemonIndex);
+      setCorrectArray(newArray);
+
+      setCurrentPokemon(PokemonList[randomPokemonIndex]);
+
+      const pokemonImage = document.querySelector('.pokemonImage');
+      pokemonImage.classList.remove('imageAnswer');
+    }
+  };
+
+  const checkAnswer = () => {
+    setCurrentPokemonName(`CAUGHT ${currentPokemon.name}!`);
+    const pokemonImage = document.querySelector('.pokemonImage');
+    pokemonImage.classList.add('imageAnswer');
+
+    const filterAnswer = currentAnswer.toLowerCase();
+    if (filterAnswer === currentPokemon.name) {
+      const score = currentScore + 1;
+      setCurrentScore(score);
+
+      if (score > highScore) {
+        setHighScore(score);
+      }
+
+      setTimeout(pickCurrentPokemon, 5000);
+
+      setCurrentAnswer('');
+    } else {
+      setCurrentPokemonName(`INVALID DATA ENTRY! WILD ${currentPokemon.name} FLED!`);
+      setGameStarted(false);
+      setFirstGame(false);
+
+      postUserScore(currentScore);
+    }
+  };
+
+  const restartGame = () => {
+    setGameStarted(true);
+    setCurrentAnswer('');
+    setCurrentScore(0);
+    setCorrectArray([]);
+    pickCurrentPokemon();
+  };
+
+  const keypressEnter = (e) => {
+    if (e.key == 'Enter') {
+      checkAnswer();
+    }
+  };
+
   return (
     <div className='quizContainer'>
-      <h1>What's that pokemon?</h1>
+      {/* <h1>Who's that Pokemon?</h1> */}
+      {/* <h1>{currentScore}</h1> */}
+      <br></br>
+      <img className='pokemonImage' src={currentPokemon.image} />
+      <div className='nameAnswerBox'>
+        <TypeWriter text={currentPokemonName} delay={100} />
+      </div>
+      <input
+        className='pokemonName'
+        placeholder="Who's that Pokemon?"
+        onChange={(e) => {
+          setCurrentAnswer(e.target.value);
+        }}
+        value={currentAnswer}
+        onKeyPress={keypressEnter}
+      />
+      <br></br>
+      <button id='submitBtn' onClick={checkAnswer}>
+        Submit
+      </button>
+      <br></br>
+      {gameStarted ? (
+        <button></button>
+      ) : (
+        <button id='startBtn' onClick={restartGame}>
+          {firstGame ? 'Start Game' : 'Restart Game'}
+        </button>
+      )}
     </div>
   );
 };
