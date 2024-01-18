@@ -3,7 +3,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 
 const Login = (props) => {
-    const { updateUserInfo } = props;
+    const { updateUserInfo, setUserName } = props;
     
     const fetchData = (data) => {
         fetch('/api/checkuser', {
@@ -15,10 +15,12 @@ const Login = (props) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('this is the fetched state data', data);
+                if (data.username) {
+                  setUserName(data.username);
+                }
                 updateUserInfo(data);
                 return;
-            })
+              })
             .catch(err => console.log(err))
         return;
     }

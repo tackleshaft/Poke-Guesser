@@ -51,4 +51,3 @@ sql.sync({ force: true })
 
 
 module.exports = { User, HighScore };
-3

@@ -9,7 +9,7 @@ const ScoreContainer = ({currentScore,
   leaderBoard}) => {
   const leaderBoardArray = [];
   leaderBoard.topScores.forEach((user) => {
-    leaderBoardArray.push(<li>{`${user.userId}: ${user.score}`}</li>);
+    leaderBoardArray.push(<li>{`${user.username}: ${user.score}`}</li>);
   });
 
   return (
@@ -28,7 +28,12 @@ const ScoreContainer = ({currentScore,
       <br></br>
       <Login updateUserInfo={useSignin} setUserName={setUserName} />
       <br></br>
-      <ul>{leaderBoardArray}</ul>
+      <span id='spanTitle2'>
+        Leaderboard
+      </span>
+      <div className="leaderboard">
+        <ol>{leaderBoardArray}</ol>
+      </div>
     </div>
   );
 };

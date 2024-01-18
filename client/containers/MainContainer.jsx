@@ -9,7 +9,7 @@ const MainContainer = () => {
   const [highScore, setHighScore] = useState(0);
   const [userName, setUserName] = useState(null);
   const [leaderBoard, setLeaderBoard] = useState({
-    topScores: [{ username: '', score: 0 }],
+    topScores: [{ username: 'Bin Zheng', score: 125 },{ username: 'Laura Forden', score: 105 }, { username: 'Hugh Stapleton', score: 75 }, { username: 'Nick Vanderlinden', score: 40 }, { username: 'Kola Bamgbose', score: 28 } ],
   });
   const [userInfo, setUserInfo] = useState({
     signedIn: false,

@@ -156,7 +156,7 @@ body {
 
 .scoreContainer {
   position: relative;
-  font-size: 2vw;
+  font-size: 1.8vw;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bolder;
   display: flex;
@@ -175,6 +175,15 @@ body {
   flex-direction: row;
 }
 
+#spanTitle2 {
+  font-size: 3vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(12, 25, 82);
+  flex-direction: row;
+  margin-left: -18%;
+}
+
 .pokeball {
   height: 3vw;
 }
@@ -187,7 +196,19 @@ body {
   border-color: rgb(130, 168, 130);
   border-style: groove;
   height: fit-content;
-  width: 100%;
+  width: 90%;
   padding: 1rem;
+  color: rgb(10, 53, 10);
+}
+
+.leaderboard {
+  background-color: green;
+  border-radius: 10px;
+  border-color: rgb(130, 168, 130);
+  border-style: groove;
+  padding: 1rem;
+  margin-left: -25%;
+  width: 90%;
+  height: fit-content;
   color: rgb(10, 53, 10);
 }
